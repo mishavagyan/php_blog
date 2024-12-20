@@ -1,5 +1,11 @@
 <?php
 // login.php
+ini_set('session.cookie_lifetime', 0); // Session lasts until browser closes
+ini_set('session.cookie_path', '/'); // Make the session available site-wide
+ini_set('session.cookie_samesite', 'Lax'); // Prevent cross-site issues
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS'])); // Use secure cookies over HTTPS
+session_start();
+
 session_start();
 include 'includes/db.php';
 if(isset($_SESSION['user_id'])) {
@@ -67,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
 
         <a href="register.php">Don't have an account? Register here</a>
+        <a href="forgot.php">Forgot password</a>
     </div>
     <script src="./assets/css/js/app.js"></script>
 </body>

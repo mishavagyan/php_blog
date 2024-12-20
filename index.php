@@ -19,7 +19,7 @@ $result = $conn->query($sql);
         <h1>Welcome to My Blog</h1>
 
         <?php if (isset($_SESSION['username'])): ?>
-            <p>Welcome, <?= htmlspecialchars($_SESSION['username']); ?> | <a href="logout.php">Logout</a></p>
+            <p>Welcome, <?= htmlspecialchars($_SESSION['username']); ?> | <a href="logout.php">Logout</a> | <a href="changePassword.php">Change password</a></p>
             <a href="create_post.php">Create New Post</a>
         <?php else: ?>
                 <a href="login.php">Login</a> | <a href="register.php">Register</a>

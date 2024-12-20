@@ -8,6 +8,11 @@ function validatePassword(password) {
     return true;
 }
 
+// function validateEmail(email) {
+//     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+//     return emailRegex.test(email);
+// }
+  
 function validateCaptcha(key, res) {
     return res == captcha[key]
 }
@@ -37,6 +42,22 @@ function register() {
     const password = document.getElementById("password").value;
     const regCaptcha = document.getElementById("registerCaptcha").value;
     if(validateCaptcha('register', regCaptcha)) {
+        if (validatePassword(password)) {
+            return true;
+        } else {
+            alert("Password must include at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character, and be at least 8 characters long");
+            return false;
+        }
+    } else {
+        alert("Invalid Captcha");
+        return false;
+    }
+}
+
+function change() {
+    const password = document.getElementById("password").value;
+    const captcha = document.getElementById("changeCaptcha").value;
+    if(validateCaptcha('change', captcha)) {
         if (validatePassword(password)) {
             return true;
         } else {
@@ -79,7 +100,7 @@ if(filename == "login.php") {
         document.getElementById("loginCaptcha").value = "";
     });
     
-} else if(filename == "register.php") {
+} else if(filename == "register.php" || filename == "forgot.php") {
     InitCaptcha("register");
 
     document.getElementById("registrationForm").addEventListener('submit', (e) => {
@@ -95,3 +116,17 @@ if(filename == "login.php") {
 }
 
 
+if(filename == "changePassword.php") {
+    InitCaptcha("change");
+
+    // document.getElementById("changeForm").addEventListener('submit', (e) => {
+    //     e.preventDefault();
+    //     let b = change();
+    //     InitCaptcha();
+    //     if(b) {
+    //         document.getElementById("changeForm").submit();
+    //     }
+    //     document.getElementById("password").value = "";
+    //     document.getElementById("changeCaptcha").value = "";
+    // });
+}
